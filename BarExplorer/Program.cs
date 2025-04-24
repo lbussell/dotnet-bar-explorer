@@ -8,9 +8,15 @@ using BarExplorer;
 
 var rootCommand = new RootCommand()
 {
+    AssetsCommand.Create(
+        name: "assets",
+        description: "Get assets for a specific BAR build"),
     BuildCommand.Create(
         name: "build",
         description: "Get information about a specific BAR build"),
+    BuildsCommand.Create(
+        name: "builds",
+        description: "Get multiple BAR builds"),
     ChannelCommand.Create(
         name: "channel",
         description: "Get information about a specific BAR channel"),
@@ -24,7 +30,9 @@ config.UseHost(
         {
             services.AddSingleton<IBasicBarClient>(_ => new BarApiClient(null, null, disableInteractiveAuth: false));
 
+            AssetsCommand.Register<AssetsCommand>(services);
             BuildCommand.Register<BuildCommand>(services);
+            BuildsCommand.Register<BuildsCommand>(services);
             ChannelCommand.Register<ChannelCommand>(services);
         })
     );
