@@ -11,6 +11,9 @@ var rootCommand = new RootCommand()
     BuildCommand.Create(
         name: "build",
         description: "Get information about a specific BAR build"),
+    ChannelCommand.Create(
+        name: "channel",
+        description: "Get information about a specific BAR channel"),
 };
 
 var config = new CommandLineConfiguration(rootCommand);
@@ -22,6 +25,7 @@ config.UseHost(
             services.AddSingleton<IBasicBarClient>(_ => new BarApiClient(null, null, disableInteractiveAuth: false));
 
             BuildCommand.Register<BuildCommand>(services);
+            ChannelCommand.Register<ChannelCommand>(services);
         })
     );
 
