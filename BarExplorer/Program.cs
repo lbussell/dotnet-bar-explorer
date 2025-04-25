@@ -28,6 +28,7 @@ config.UseHost(
     _ => Host.CreateDefaultBuilder(),
     host => host.ConfigureServices(services =>
         {
+            services.AddHttpClient();
             services.AddSingleton<IBasicBarClient>(_ => new BarApiClient(null, null, disableInteractiveAuth: false));
 
             AssetsCommand.Register<AssetsCommand>(services);
